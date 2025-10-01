@@ -1,0 +1,27 @@
+{
+  "name": "hextorgb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "test": "mocha \"test/**/*.test.js\" --reporter spec"
+  },
+  "keywords": [],
+  "author": "RZ RAKIB",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "chai": "^6.2.0",
+    "mocha": "^11.7.3",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
+  }
+}
