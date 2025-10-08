@@ -11,6 +11,9 @@ const hexRoute = require('./routes/hex');
 function createApp() {
   const app = express();
 
+  // ✅ Serve static frontend files
+  app.use(express.static('public'));
+
   // Health check
   app.get('/health', (req, res) => {
     res.json({ status: 'ok' });

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HEX ↔ RGB Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      max-width: 500px;
+    }
+    input, button {
+      padding: 0.5rem;
+      margin: 0.25rem 0;
+    }
+    .color-box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #ccc;
+      margin-top: 1rem;
+    }
+    h2 {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>HEX ↔ RGB Converter</h1>
+
+  <!-- HEX to RGB -->
+  <section>
+    <h2>HEX → RGB</h2>
+    <form id="hexForm">
+      <label>Enter HEX:</label><br />
+      <input type="text" id="hexInput" placeholder="#ffcc00" required />
+      <button type="submit">Convert</button>
+    </form>
+    <div id="hexResult"></div>
+    <div id="hexColorBox" class="color-box"></div>
+  </section>
+
+  <!-- RGB to HEX -->
+  <section>
+    <h2>RGB → HEX</h2>
+    <form id="rgbForm">
+      <label>Enter RGB (e.g. 255,204,0):</label><br />
+      <input type="text" id="rgbInput" placeholder="255,204,0" required />
+      <button type="submit">Convert</button>
+    </form>
+    <div id="rgbResult"></div>
+    <div id="rgbColorBox" class="color-box"></div>
+  </section>
+
+  <script>
+    // --- HEX → RGB (calls your backend API)
+    document.getElementById('hexForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const hex = document.getElementById('hexInput').value.trim();
+      const resultDiv = document.getElementById('hexResult');
+      const box = document.getElementById('hexColorBox');
+      resultDiv.textContent = 'Loading...';
+      box.style.background = 'transparent';
+
+      try {
+        const response = await fetch(`/api/hex-to-rgb?hex=${encodeURIComponent(hex)}`);
+        const data = await response.json();
+        if (response.ok) {
+          resultDiv.innerHTML = `<strong>RGB:</strong> ${data.rgbString}`;
+          box.style.background = data.hex;
+        } else {
+          resultDiv.textContent = `Error: ${data.error}`;
+        }
+      } catch (err) {
+        resultDiv.textContent = `Error: ${err.message}`;
+      }
+    });
+
+    // --- RGB → HEX (computed in frontend)
+    document.getElementById('rgbForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const input = document.getElementById('rgbInput').value.trim();
+      const resultDiv = document.getElementById('rgbResult');
+      const box = document.getElementById('rgbColorBox');
+      resultDiv.textContent = '';
+
+      try {
+        const [r, g, b] = input.split(',').map((v) => parseInt(v.trim(), 10));
+        if ([r, g, b].some((v) => isNaN(v) || v < 0 || v > 255)) {
+          throw new Error('Invalid RGB values');
+        }
+        const hex = '#' + [r, g, b].map((v) => v.toString(16).padStart(2, '0')).join('');
+        resultDiv.innerHTML = `<strong>HEX:</strong> ${hex}`;
+        box.style.background = hex;
+      } catch (err) {
+        resultDiv.textContent = `Error: ${err.message}`;
+        box.style.background = 'transparent';
+      }
+    });
+  </script>
+</body>
+</html>
