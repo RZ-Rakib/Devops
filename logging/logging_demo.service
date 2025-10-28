@@ -1,0 +1,15 @@
+[Unit]
+Description=Python Logging Demo Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/env python3 /path/to/logging_demo.py
+Restart=always
+User=nobody
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
