@@ -1,0 +1,4 @@
+{"level":"error","message":"[COUNTER] increase failed: Simulated exception in counter increase","timestamp":"2025-10-28T15:43:18.377Z"}
+{"level":"error","message":"[COUNTER] reset failed: Counter value is invalid, cannot reset","timestamp":"2025-10-28T15:52:10.896Z"}
+{"level":"error","message":"[COUNTER] reset failed: Counter value is invalid, cannot reset","timestamp":"2025-10-28T15:52:43.375Z"}
+{"level":"error","message":"[COUNTER] reset failed: Counter value is invalid, cannot reset","timestamp":"2025-10-28T15:56:31.184Z"}
