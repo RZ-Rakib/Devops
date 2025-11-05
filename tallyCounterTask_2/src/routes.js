@@ -14,7 +14,7 @@ router.get('/counter-read', (req, res) => {
   try {
     const value = counter.get();
     logger.info(`[COUNTER] read ${value}`);
-    res.json({ counter: value });
+    res.json({ count: value });
   } catch (err) {
     logger.error(`[COUNTER] read failed: ${err.message}`);
     res.status(500).json({ error: 'Failed to read counter' });
@@ -26,7 +26,7 @@ router.get('/counter-increase', (req, res) => {
   try {
     const value = counter.increase();
     logger.info(`[COUNTER] increase ${value}`);
-    res.json({ counter: value });
+    res.json({ count: value });
   } catch (err) {
     logger.error(`[COUNTER] increase failed: ${err.message}`);
     res.status(500).json({ error: 'Failed to increase counter' });
@@ -38,7 +38,7 @@ router.get('/counter-reset', (req, res) => {
   try {
     const value = counter.reset();
     logger.warn(`[COUNTER] zeroed ${value}`);
-    res.json({ counter: value });
+    res.json({ count: value });
   } catch (err) {
     logger.error(`[COUNTER] reset failed: ${err.message}`);
     res.status(500).json({ error: 'Failed to reset counter' });
