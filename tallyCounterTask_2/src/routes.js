@@ -51,4 +51,7 @@ router.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
+// HEalth check
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
 module.exports = router;
