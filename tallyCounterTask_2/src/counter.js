@@ -9,7 +9,7 @@ function get() {
 
 function increase() {
   if (typeof counter !== 'number') {
-    throw new Error('Counter value is invalid, cannot increase');
+    throw new Error('Counter value is invalid, and  cannot increase ');
   }
   counter++;
   return counter;
